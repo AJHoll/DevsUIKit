@@ -1,0 +1,16 @@
+@import 'primereact/resources/primereact.min.css';
+@import "devs";
+@import "./themes/primereact/theme";
+@import "./themes/ag-grid/devs-theme";
+
+// Шрифты
+@font-face {
+  font-family: 'NotoSansHK';
+  src: local('NotoSansHK'),
+  url('__FONTSDIR__/NotoSansHK/NotoSansHK-Light.otf')
+  format('opentype');
+  font-weight: 400;
+}
+
+// components import
+@import "../DevsButton/DevsButton";

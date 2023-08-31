@@ -1,60 +1,131 @@
-import resolve from "@rollup/plugin-node-resolve";
-import typescript from "@rollup/plugin-typescript";
-import terser from "@rollup/plugin-terser";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import scss from 'rollup-plugin-scss';
+import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import * as fs from 'fs';
+import typescript from 'rollup-plugin-typescript2';
+import replace from '@rollup/plugin-replace';
+import terser from '@rollup/plugin-terser';
+import { getFolders } from './scripts/buildUtils';
+import generatePackageJson from 'rollup-plugin-generate-package-json';
+import scss from 'rollup-plugin-scss';
+import copy from 'rollup-plugin-copy'
 
-const packageJson = require("./package.json");
+const packageJson = require('./package.json');
 
 const plugins = [
     peerDepsExternal(),
     resolve(),
+    replace({
+        __IS_DEV__: process.env.NODE_ENV === 'development',
+    }),
     commonjs(),
     typescript({
         tsconfig: './tsconfig.json',
+        useTsconfigDeclarationDir: true,
     }),
     terser(),
-]
-const getFolders = (entry) => {
-    const dirs = fs.readdirSync(entry, { withFileTypes: true })
-    return dirs
-        .filter((dir) => dir.name !== 'index.ts' && dir.isDirectory())
-        .filter((dir) => dir.name !== 'theme')
-        .map((dir) => dir.name);
-}
-
-const folderBuilds = getFolders('./src').map(folder => {
+];
+const subfolderPlugins = (folderName) => [
+    ...plugins,
+    generatePackageJson({
+        baseContents: {
+            name: `${packageJson.name}/${folderName}`,
+            private: true,
+            main: '../cjs/index.js',
+            module: './index.js',
+            types: './index.d.ts',
+        },
+    }),
+];
+const folderBuilds = getFolders('./src').map((folder) => {
     return {
         input: `src/${folder}/index.ts`,
         output: {
             file: `dist/${folder}/index.js`,
             sourcemap: true,
             exports: 'named',
+            format: 'esm',
         },
-        plugins,
-        external: [/\.scss$/, 'react', 'react-dom'],
-    }
-})
+        plugins: subfolderPlugins(folder),
+        external: [/\.scss$/, 'react', 'react-dom', 'primereact'],
+    };
+});
+
+const fontTokens = {
+    __FONTSDIR__: '../fonts',
+}
 
 export default [
     {
-        input: "src/index.ts",
-        output: {
-            file: packageJson.module,
-            format: "mjs",
-            sourcemap: true,
-        },
-        plugins: [...plugins,
-            scss({
-                name: 'devs-ui-kit',
-                fileName: 'devs-ui-kit.css',
-                sourceMap: true,
-
-            }),
+        input: ['src/index.ts'],
+        output: [
+            {
+                file: packageJson.module,
+                format: 'esm',
+                sourcemap: true,
+                exports: 'named',
+            },
         ],
-        external: ['react', 'react-dom'],
+        plugins: [...plugins],
+        external: ['react', 'react-dom', 'primereact'],
     },
     ...folderBuilds,
+    {
+        input: ['src/index.ts'],
+        output: [
+            {
+                file: packageJson.main,
+                format: 'cjs',
+                sourcemap: 'inline',
+                exports: 'named',
+            },
+        ],
+        plugins,
+        external: [/\.scss$/, 'react', 'react-dom', 'primereact'],
+    },
+    {
+        input: ['src/styles/index.scss'],
+        output: [{
+            file: 'dist/styles/devs-ui-kit.css',
+        }],
+        plugins: [
+            replace(fontTokens),
+            scss({
+                fileName: 'devs-ui-kit.css',
+            }),
+            copy({
+                targets: [
+                    {
+                        src: ['src/fonts/NotoSansHK/NotoSansHK-Light.otf'],
+                        dest: 'dist/fonts/NotoSansHK',
+                    },
+                ],
+            }),
+        ],
+    },
+    {
+        input: ['src/styles/icons.scss'],
+        output: [{
+            file: 'dist/styles/devs-ui-kit-icons.css',
+        }],
+        plugins: [
+            replace(fontTokens),
+            scss({
+                fileName: 'devs-ui-kit-icons.css',
+            }),
+            copy({
+                targets: [
+                    {
+                        src: [
+                            'src/fonts/lineicons/lineicons.eot',
+                            'src/fonts/lineicons/lineicons.svg',
+                            'src/fonts/lineicons/lineicons.ttf',
+                            'src/fonts/lineicons/lineicons.woff',
+                            'src/fonts/lineicons/lineicons.woff2',
+                        ],
+                        dest: 'dist/fonts/lineicons',
+                    },
+                ],
+            }),
+        ],
+    },
 ];
