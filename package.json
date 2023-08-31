@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/AJHoll"
   },
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "UI Kit for DevSystem projects",
   "main": "dist/cjs/index.js",
   "module": "dist/index.js",
@@ -51,6 +51,7 @@
     "primereact": "^9.6.2",
     "react": "^18.2.0",
     "rollup": "^3.28.1",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^6.0.0",
     "rollup-plugin-exclude-dependencies-from-bundle": "^1.1.23",
     "rollup-plugin-generate-package-json": "^3.2.0",
