@@ -1,0 +1,16 @@
+@import "../styles/devs";
+
+.devs_modal {
+  .p-dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-dialog-header-close {
+    color: $color-secondary !important;
+
+    &:hover {
+      color: $color-primary !important;
+    }
+  }
+}
