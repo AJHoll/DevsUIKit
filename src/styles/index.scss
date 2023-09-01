@@ -7,10 +7,26 @@
 @font-face {
   font-family: 'NotoSansHK';
   src: local('NotoSansHK'),
-  url('__FONTSDIR__/NotoSansHK/NotoSansHK-Light.otf')
-  format('opentype');
+  url('__FONTSDIR__/NotoSansHK/NotoSansHK-Light.otf') format('opentype');
   font-weight: 400;
 }
 
 // components import
+@import "../DevsBlockUI/DevsBlockUI";
 @import "../DevsButton/DevsButton";
+@import "../DevsCalendar/DevsCalendar";
+@import "../DevsCheckbox/DevsCheckbox";
+@import "../DevsForm/DevsForm";
+@import "../DevsFormItem/DevsFormItem";
+@import "../DevsInput/DevsInput";
+@import "../DevsModal/DevsModal";
+@import "../DevsPanel/DevsPanel";
+@import "../DevsPassword/DevsPassword";
+@import "../DevsRadioButton/DevsRadioButton";
+@import "../DevsSelect/DevsSelect";
+@import "../DevsSplitter/DevsSplitter";
+@import "../DevsSplitterPanel/DevsSplitterPanel";
+@import "../DevsTabPanel/DevsTabPanel";
+@import "../DevsTabView/DevsTabView";
+@import "../DevsTextArea/DevsTextArea";
+@import "../DevsToast/DevsToast";

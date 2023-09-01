@@ -36,3 +36,7 @@ $raised-shadow-color: $color-black;
 .devs_focused {
   box-shadow: 0 3px 5px 1px transparentize($raised-shadow-color, 0.75);
 }
+
+.devs_content {
+  background-color: #f9fafb;
+}
