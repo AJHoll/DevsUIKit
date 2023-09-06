@@ -40,6 +40,7 @@ const subfolderPlugins = (folderName) => [
       {
         src: `src/${folderName}/${folderName}.scss`,
         dest: `dist/${folderName}/`,
+        transform: (contents, name) => contents.toString().replace('../styles', '../scss'),
       },
     ],
   }),
