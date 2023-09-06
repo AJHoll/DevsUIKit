@@ -2,6 +2,7 @@ export * from './DevsBlockUI';
 export * from './DevsButton';
 export * from './DevsCalendar';
 export * from './DevsCheckbox';
+export * from './DevsContent';
 export * from './DevsForm';
 export * from './DevsFormItem';
 export * from './DevsInput';
