@@ -17,3 +17,4 @@ export * from './DevsTabPanel';
 export * from './DevsTabView';
 export * from './DevsTextArea';
 export * from './DevsToast';
+export * from './DevsMenubar';

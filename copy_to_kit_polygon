@@ -1,0 +1,2 @@
+rm -rf ../devs-ui-kit-polygon/node_modules/@ajholl/devsuikit/dist/*;
+cp -rf ./dist/* ../devs-ui-kit-polygon/node_modules/@ajholl/devsuikit/dist;
