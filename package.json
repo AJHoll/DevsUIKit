@@ -1,6 +1,6 @@
 {
   "name": "@ajholl/devsuikit",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "UI Kit for DevSystem projects",
   "private": false,
   "main": "dist/cjs/index.js",
@@ -14,7 +14,7 @@
     "build": "npm run rollup && npm run post:build",
     "post:build": "node ./scripts/frankBuild.js",
     "rollup": "rm -rf ./dist && rollup -c --bundleConfigAsCjs",
-    "publish": "npm publish --access public",
+    "publish": "npm adduser && npm publish --access public",
     "build:copy": "npm run build && bash ./copy_to_kit_polygon",
     "copy": "bash ./copy_to_kit_polygon"
   },
