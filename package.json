@@ -1,6 +1,6 @@
 {
   "name": "@ajholl/devsuikit",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "UI Kit for DevSystem projects",
   "private": false,
   "main": "dist/cjs/index.js",
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/AJHoll/DevsUIKit#readme",
   "peerDependencies": {
-    "primereact": "^9.6.2",
+    "primereact": "^10.8.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^9.0.0"
