@@ -16,6 +16,8 @@ export interface DevsPasswordProps {
     className?: string;
     invalid?: boolean;
     feedback?: boolean;
+    onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 interface DevsPasswordState {
@@ -47,6 +49,8 @@ export default class DevsPassword extends React.Component<DevsPasswordProps, Dev
             onChange,
             invalid,
             feedback,
+            onKeyUp,
+            onKeyDown,
         } = this.props;
         const { focused, value } = this.state;
         return (
@@ -88,6 +92,8 @@ export default class DevsPassword extends React.Component<DevsPasswordProps, Dev
                               });
                           }}
                           onChange={onChange}
+                          onKeyUp={onKeyUp}
+                          onKeyDown={onKeyDown}
                 />
                 {
                     addonAfter !== undefined ? (
