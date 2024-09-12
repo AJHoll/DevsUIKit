@@ -1,6 +1,6 @@
 {
   "name": "@ajholl/devsuikit",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "UI Kit for DevSystem projects",
   "private": false,
   "main": "dist/cjs/index.js",
