@@ -1,6 +1,6 @@
 {
   "name": "@ajholl/devsuikit",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "UI Kit for DevSystem projects",
   "private": false,
   "main": "dist/cjs/index.js",
@@ -52,7 +52,7 @@
     "autoprefixer": "^10.4.15",
     "postcss": "8.4.31",
     "postcss-scss": "^4.0.7",
-    "primereact": "^9.6.2",
+    "primereact": "9.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^3.28.1",
